@@ -17,13 +17,14 @@ import os
 import pytest
 from typing import Any, Dict, List
 from a2ui.inference.schema.catalog import A2uiCatalog
-from a2ui.inference.schema.constants import BASIC_CATALOG_NAME
+from a2ui.inference.schema.constants import VERSION_0_8, VERSION_0_9
+from a2ui.inference.basic_catalog.constants import BASIC_CATALOG_NAME
 
 
 def test_catalog_id_property():
   catalog_id = "https://a2ui.org/basic_catalog.json"
   catalog = A2uiCatalog(
-      version="0.8",
+      version=VERSION_0_8,
       name=BASIC_CATALOG_NAME,
       s2c_schema={},
       common_types_schema={},
@@ -34,7 +35,7 @@ def test_catalog_id_property():
 
 def test_catalog_id_missing_raises_error():
   catalog = A2uiCatalog(
-      version="0.8",
+      version=VERSION_0_8,
       name=BASIC_CATALOG_NAME,
       s2c_schema={},
       common_types_schema={},
@@ -58,7 +59,7 @@ def test_load_examples(tmp_path):
   (example_dir / "ignored.txt").write_text("should not be loaded")
 
   catalog = A2uiCatalog(
-      version="0.8",
+      version=VERSION_0_8,
       name=BASIC_CATALOG_NAME,
       s2c_schema={},
       common_types_schema={},
@@ -75,7 +76,7 @@ def test_load_examples(tmp_path):
 
 def test_load_examples_none_or_invalid_path():
   catalog = A2uiCatalog(
-      version="0.8",
+      version=VERSION_0_8,
       name=BASIC_CATALOG_NAME,
       s2c_schema={},
       common_types_schema={},
@@ -96,7 +97,7 @@ def test_with_pruned_components():
       },
   }
   catalog = A2uiCatalog(
-      version="0.8",
+      version=VERSION_0_8,
       name=BASIC_CATALOG_NAME,
       s2c_schema={},
       common_types_schema={},
@@ -126,7 +127,7 @@ def test_with_pruned_components():
       "components": {"Text": {}, "Button": {}, "Image": {}},
   }
   catalog_with_defs = A2uiCatalog(
-      version="0.9",
+      version=VERSION_0_9,
       name=BASIC_CATALOG_NAME,
       s2c_schema={},
       common_types_schema={},
@@ -143,7 +144,7 @@ def test_with_pruned_components():
 
 def test_render_as_llm_instructions():
   catalog = A2uiCatalog(
-      version="0.9",
+      version=VERSION_0_9,
       name=BASIC_CATALOG_NAME,
       s2c_schema={"s2c": "schema"},
       common_types_schema={"common": "types"},
